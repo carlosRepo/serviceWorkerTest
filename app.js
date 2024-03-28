@@ -20,7 +20,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-    res.send("Hello world");
+    res.send("pagina inicio");
 })
 
 const subDatabse = [];
@@ -35,7 +35,7 @@ app.post("/save-subscription", (req, res) => {
 app.get("/send-notification", (req, res) => {
 
     for (let i = 0; i < subDatabse.length; i++) {
-        webpush.sendNotification(subDatabse[1], "pruea"+i);
+        webpush.sendNotification(subDatabse[i], "mensaje desde back");
     }
     res.json({ "statue": "Success", "message": "Message sent to push service" });
 })
