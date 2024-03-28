@@ -27,19 +27,25 @@ const subDatabse = [];
 
 
 app.post("/save-subscription", (req, res) => {
-    console.log(req.body)
-    subDatabse.push(req.body);
-    res.json({ status: "Success", message: "Subscription saved!" })
-})
-
+    const subscription = req.body;
+    subDatabase.push(subscription);
+    res.json({ status: "Success", message: "Subscription saved!" });
+});
 app.get("/send-notification", (req, res) => {
-
-    for (let i = 0; i < subDatabse.length; i++) {
-        webpush.sendNotification(subDatabse[1], "pruea"+i);
+    if (subDatabase.length > 0) {
+        const message = "Mensaje de tu servidor";
+        Promise.all(subDatabase.map(subscription =>
+            webpush.sendNotification(subscription, JSON.stringify({ title: "Notificación", body: message }))
+        ))
+            .then(() => res.json({ status: "Success", message: "Message sent to push service" }))
+            .catch(err => {
+                console.error("Error sending notification:", err);
+                res.status(500).json({ status: "Error", message: "Failed to send notification" });
+            });
+    } else {
+        res.status(400).json({ status: "Error", message: "No subscriptions found" });
     }
-    res.json({ "statue": "Success", "message": "Message sent to push service" });
-})
-
+});
 app.listen(port, () => {
-    console.log("Server running on port 3000!");
-})
+    console.log(`Server running on port ${port}!`);
+});
