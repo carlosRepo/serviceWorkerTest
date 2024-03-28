@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
     res.send("Hello world");
 })
 
-const subDatabse = [];
+const subDatabase = [];
 
 
 app.post("/save-subscription", (req, res) => {
