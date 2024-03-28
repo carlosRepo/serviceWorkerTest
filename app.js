@@ -34,10 +34,10 @@ app.post("/save-subscription", (req, res) => {
 
 app.get("/send-notification", (req, res) => {
 
-    for (let i = 0; i < subDatabse.length; i++) {
+    for (let i = 0; i <= subDatabse.length; i++) {
         webpush.sendNotification(subDatabse[i], "mensaje desde back");
     }
-    res.json({ "statue": "Success", "message": "Message sent to push service" });
+    res.json({ "statue": "Success", "message": "Message sent to the client" });
 })
 
 app.listen(port, () => {
