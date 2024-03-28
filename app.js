@@ -33,7 +33,7 @@ app.post("/save-subscription", (req, res) => {
 })
 
 app.get("/send-notification", (req, res) => {
-    webpush.sendNotification(subDatabse[0], "Hello world");
+    webpush.sendNotification(subDatabse[0], "mensaje de back");
     res.json({ "statue": "Success", "message": "Message sent to push service" });
 })
 
