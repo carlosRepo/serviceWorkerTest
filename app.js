@@ -34,9 +34,8 @@ app.post("/save-subscription", (req, res) => {
 
 app.get("/send-notification", (req, res) => {
 
-    for (let i = 0; i <= subDatabse.length; i++) {
-        webpush.sendNotification(subDatabse[i], "mensaje desde back");
-    }
+    webpush.sendNotification(subDatabse[0], "mensaje desde back");
+    console.log()
     res.json({ "statue": "Success", "message": "Message sent to the client" });
 })
 
