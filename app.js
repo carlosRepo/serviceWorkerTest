@@ -25,7 +25,6 @@ app.get("/", (req, res) => {
 
 const subDatabase = [];
 
-
 app.post("/save-subscription", (req, res) => {
     const subscription = req.body;
     subDatabase.push(subscription);
